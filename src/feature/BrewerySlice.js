@@ -13,13 +13,15 @@ const BrewerySlice = createSlice({
     setSearchInput: (state, action) => {
       state.searchInput = action.payload;
     },
+    addSelectedValue: (state, action) => {
+      state.selectedValue.push(action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchBrewery.fulfilled, (state, action) => {
         state.isLoading = false;
         state.searchValues = [...action.payload];
-        console.log(state.searchValues);
       })
       .addCase(fetchBrewery.pending, (state) => {
         state.isLoading = true;
@@ -35,9 +37,20 @@ export default BrewerySlice.reducer;
 export const fetchBrewery = createAsyncThunk(
   "fetch/BreweryLocation",
   async (location) => {
-    const url = `https://api.openbrewerydb.org/v1/breweries/autocomplete?query=${location
+    const url = `https://api.openbrewerydb.org/v1/breweries?by_city=${location
       .split(" ")
-      .reduce((prev, cur) => prev + "_" + cur)}`;
+      .reduce((prev, cur) => prev + "_" + cur)}&per_page=50`;
+    const response = await axios.get(url);
+    return response.data;
+  }
+);
+//addCase soon
+export const fetchBreweryDetails = createAsyncThunk(
+  "fetch/BreweryDetails",
+  async (location) => {
+    const url = `https://api.openbrewerydb.org/v1/breweries?by_city=${location
+      .split(" ")
+      .reduce((prev, cur) => prev + "_" + cur)}&per_page=50`;
     const response = await axios.get(url);
     return response.data;
   }
