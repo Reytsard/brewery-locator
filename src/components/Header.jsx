@@ -21,7 +21,7 @@ function Header() {
           </button>
           <div
             className="offcanvas offcanvas-end"
-            tabindex="-1"
+            tabIndex="-1"
             id="#offcanvas"
             aria-labelledby="#offcanvasLabel"
           >

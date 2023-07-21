@@ -1,9 +1,15 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { fetchBrewery } from "../feature/BrewerySlice";
 
 function BreweryLocator() {
+  const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const changeSearchHandler = (e) => {
     setSearch(e.target.value);
+  };
+  const searchLocationHandler = () => {
+    dispatch(fetchBrewery(search));
   };
   return (
     <div className="brewery-locator">
@@ -24,10 +30,18 @@ function BreweryLocator() {
             type="text"
             onChange={changeSearchHandler}
           />
-          <button className="btn btn-lg d-grid place-items-center">
+          <button
+            className="my-3 w-100 btn btn-lg btn-outline-secondary d-grid place-items-center"
+            onClick={searchLocationHandler}
+          >
             Search Nearby Brewery
           </button>
-          <div className="results container"></div>
+          <div className="results container w-100">
+            <div className="container text-center border">
+              <div className="name">Name</div>
+              <div className="address">Address</div>
+            </div>
+          </div>
         </div>
         <div className="map-locator col border p-2">Map here</div>
       </div>

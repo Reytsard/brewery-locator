@@ -9,6 +9,8 @@ import "./styles/main.css";
 import RootPage from "./components/RootPage";
 import BreweryLocator from "./components/BreweryLocator";
 import PageNotFound from "./components/PageNotFound";
+import { Provider } from "react-redux";
+import { store } from "./feature/store";
 
 function App() {
   const router = createBrowserRouter(
@@ -21,7 +23,9 @@ function App() {
   );
   return (
     <div className="App">
-      <RouterProvider router={router}></RouterProvider>
+      <Provider store={store}>
+        <RouterProvider router={router}></RouterProvider>
+      </Provider>
     </div>
   );
 }
