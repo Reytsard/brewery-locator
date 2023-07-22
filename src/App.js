@@ -1,4 +1,5 @@
 import {
+  Navigate,
   Route,
   RouterProvider,
   createBrowserRouter,
@@ -17,7 +18,7 @@ function App() {
     createRoutesFromElements(
       <Route path="/find-brewery" element={<RootPage />}>
         <Route index element={<BreweryLocator />} />
-        <Route path="*" element={<PageNotFound />} />
+        <Route path="*" element={<Navigate to="find-brewery" replace />} />
       </Route>
     )
   );

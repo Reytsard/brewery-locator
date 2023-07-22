@@ -1,5 +1,4 @@
 import React from "react";
-import Map from "./Map";
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
 

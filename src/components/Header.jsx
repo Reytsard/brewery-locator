@@ -36,17 +36,17 @@ function Header() {
             <div className="offcanvas-body">
               <ul className="navbar-nav flex-grow-1 justify-content-between">
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="find-brewery">
+                  <NavLink className="nav-link" to="/find-brewery">
                     Find A Brewery
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="about">
+                  <NavLink className="nav-link" to="/about">
                     About
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="support">
+                  <NavLink className="nav-link" to="/support">
                     Support
                   </NavLink>
                 </li>
