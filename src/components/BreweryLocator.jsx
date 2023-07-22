@@ -30,11 +30,17 @@ function BreweryLocator() {
             </h5>
             <h5>Phone: {item.phone}</h5>
             <h5>Website: {item.website_url}</h5>
+            <NavLink
+              className="btn btn-md btn-outline-secondary"
+              to={`${item.id}`}
+            >
+              Learn More
+            </NavLink>
           </div>
         </div>
       ));
     }
-    return <div className="container">Select A Brewery</div>;
+    return <div className="container h-100 text-center">Select A Brewery</div>;
   }, [selectedBrewery]);
   const breweryLocationData = useSelector((state) => state.recipe.searchValues);
   const breweryLocation = useMemo(() => {
