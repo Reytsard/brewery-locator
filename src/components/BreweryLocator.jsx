@@ -21,8 +21,8 @@ function BreweryLocator() {
   const breweryDetails = useMemo(() => {
     if (selectedBrewery !== undefined) {
       return selectedBrewery.map((item) => (
-        <div className="container" key={item.id}>
-          <h2>{item.name}</h2>
+        <div className="container w-100 h-100" key={item.id}>
+          <h2 className="text-center my-4">{item.name}</h2>
           <div className="details">
             <h5>
               Address: {item.address_1} {item.city} {item.postal_code}{" "}
