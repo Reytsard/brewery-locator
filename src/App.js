@@ -15,8 +15,8 @@ import { store } from "./feature/store";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<RootPage />}>
-        <Route path="find-brewery" element={<BreweryLocator />} />
+      <Route path="/find-brewery" element={<RootPage />}>
+        <Route index element={<BreweryLocator />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     )

@@ -6,16 +6,42 @@ import { NavLink } from "react-router-dom";
 function BreweryLocator() {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
+  const [selectedBrewery, setSelectedBrewery] = useState([]);
   const changeSearchHandler = (e) => {
     setSearch(e.target.value);
   };
   const searchLocationHandler = () => {
     dispatch(fetchBrewery(search));
   };
-  const addSelectedItemHandler = (id) => {
+  const addSelectedItemHandler = (brewery) => {
     // dispatch(fetchBreweryDetails(search))
     // dispatch()
+    setSelectedBrewery([brewery]);
   };
+  const breweryDetails = useMemo(() => {
+    if (selectedBrewery !== undefined) {
+      return selectedBrewery.map((item) => (
+        <div className="container w-100 h-100" key={item.id}>
+          <h2 className="text-center my-4">{item.name}</h2>
+          <div className="details">
+            <h5>
+              Address: {item.address_1} {item.city} {item.postal_code}{" "}
+              {item.country}
+            </h5>
+            <h5>Phone: {item.phone}</h5>
+            <h5>Website: {item.website_url}</h5>
+            <NavLink
+              className="btn btn-md btn-outline-secondary"
+              to={`${item.id}`}
+            >
+              Learn More
+            </NavLink>
+          </div>
+        </div>
+      ));
+    }
+    return <div className="container h-100 text-center">Select A Brewery</div>;
+  }, [selectedBrewery]);
   const breweryLocationData = useSelector((state) => state.recipe.searchValues);
   const breweryLocation = useMemo(() => {
     if (breweryLocationData.length !== 0) {
@@ -23,7 +49,7 @@ function BreweryLocator() {
         <NavLink
           key={item.id}
           className="card text-decoration-none p-2"
-          onClick={() => addSelectedItemHandler(item.id)}
+          onClick={() => addSelectedItemHandler(item)}
         >
           {item.name}
         </NavLink>
@@ -65,7 +91,7 @@ function BreweryLocator() {
             </div> */}
           </div>
         </div>
-        <div className="map-locator col border p-2">Map here</div>
+        <div className="map-locator col border p-2">{breweryDetails}</div>
       </div>
     </div>
   );
