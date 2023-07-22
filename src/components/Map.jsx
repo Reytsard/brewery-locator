@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import React from "react";
+import { useSelector } from "react-redux";
 
 function Map() {
   const { isLoaded } = useJsApiLoader({
@@ -8,17 +9,15 @@ function Map() {
     googleMapsApiKey: "AIzaSyCq71N1GHDQWEhBF16jWgKY-pN4nM0fUFM",
   });
   const [map, setMap] = useState(null);
-  const [latlong, setlatlong] = useState({
-    lat: 16.4023,
-    lng: 120.596,
-  });
+  const latlong = useSelector((state) => state.brewery.latlong);
+
   const onLoad = useCallback(
     (map) => {
       const bounds = new window.google.maps.LatLngBounds(latlong);
       map.fitBounds(bounds);
       setMap(map);
     },
-    [latlong]
+    [setMap]
   );
   const onUnmount = useCallback(
     (map) => {

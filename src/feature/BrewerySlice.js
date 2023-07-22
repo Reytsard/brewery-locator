@@ -7,14 +7,22 @@ const BrewerySlice = createSlice({
     searchInput: "",
     searchValues: [],
     selectedValue: [],
+    wishLish: [],
     isLoading: false,
+    latlong: {
+      lat: null,
+      lng: null,
+    },
   },
   reducers: {
     setSearchInput: (state, action) => {
       state.searchInput = action.payload;
     },
-    addSelectedValue: (state, action) => {
-      state.selectedValue.push(action.payload);
+    setLongitude: (state, action) => {
+      state.latlong.lng = action.payload;
+    },
+    setLatitude: (state, action) => {
+      state.latlong.lat = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -22,6 +30,10 @@ const BrewerySlice = createSlice({
       .addCase(fetchBrewery.fulfilled, (state, action) => {
         state.isLoading = false;
         state.searchValues = [...action.payload];
+        state.latlong = {
+          lat: Number.parseInt(action.payload.latitude * 10000) / 10000,
+          lng: Number.parseInt(action.payload.longitude * 10000) / 10000,
+        };
       })
       .addCase(fetchBrewery.pending, (state) => {
         state.isLoading = true;
@@ -32,7 +44,8 @@ const BrewerySlice = createSlice({
   },
 });
 
-export const { setSearchInput } = BrewerySlice.actions;
+export const { setSearchInput, setLongitude, setLatitude } =
+  BrewerySlice.actions;
 export default BrewerySlice.reducer;
 export const fetchBrewery = createAsyncThunk(
   "fetch/BreweryLocation",

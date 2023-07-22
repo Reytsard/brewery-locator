@@ -1,4 +1,5 @@
 import {
+  Navigate,
   Route,
   RouterProvider,
   createBrowserRouter,
@@ -11,13 +12,15 @@ import BreweryLocator from "./components/BreweryLocator";
 import PageNotFound from "./components/PageNotFound";
 import { Provider } from "react-redux";
 import { store } from "./feature/store";
+import WishList from "./components/WishList";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootPage />}>
-        <Route path="find-brewery" element={<BreweryLocator />} />
-        <Route path="*" element={<PageNotFound />} />
+        <Route path="/find-brewery" element={<BreweryLocator />} />
+        <Route path="/wishlist" element={<WishList />} />
+        <Route path="*" element={<Navigate to="/find-brewery" replace />} />
       </Route>
     )
   );
