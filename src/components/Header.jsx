@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 function Header() {
+  const wishlistCount = useSelector((state) => state.brewery.wishlistCount);
+  const wishListCounter = useMemo(() => {
+    if (wishlistCount === 0) {
+      return;
+    } else {
+      return <div className="wishlistCount d-inline">{wishlistCount}</div>;
+    }
+  }, [wishlistCount]);
   return (
     <header>
       <nav
@@ -49,6 +58,7 @@ function Header() {
                   <NavLink className="nav-link" to="/wishlist">
                     Wishlist
                   </NavLink>
+                  <div>{}</div>
                 </li>
               </ul>
             </div>

@@ -6,7 +6,7 @@ function RootPage() {
   return (
     <div className="root-page">
       <Header />
-      <div className="container grid justify-content-center align-items-center wh-100 text-center m-5">
+      <div className="container grid justify-content-center align-items-center wh-100 text-center p-5">
         <h1>Find a Brewery Close to you</h1>
         <NavLink
           className="btn btn-outline-secondary btn-lg"

@@ -17,7 +17,7 @@ function Map() {
       map.fitBounds(bounds);
       setMap(map);
     },
-    [setMap]
+    [setMap, latlong]
   );
   const onUnmount = useCallback(
     (map) => {
