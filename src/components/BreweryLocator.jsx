@@ -37,7 +37,10 @@ function BreweryLocator() {
   const breweryDetails = useMemo(() => {
     if (Object.keys(selectedBrewery).length !== 0) {
       return (
-        <div className="container w-100 h-100" key={selectedBrewery.id}>
+        <div
+          className="container w-100 h-100 overflow-y-auto"
+          key={selectedBrewery.id}
+        >
           <div className="row">
             <h2 className="text-center my-4">{selectedBrewery.name}</h2>
             <div className="details">
