@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/brewery-locator/static/css/main.0242b900.css",
+    "main.js": "/brewery-locator/static/js/main.43163c4e.js",
+    "index.html": "/brewery-locator/index.html",
+    "main.0242b900.css.map": "/brewery-locator/static/css/main.0242b900.css.map",
+    "main.43163c4e.js.map": "/brewery-locator/static/js/main.43163c4e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0242b900.css",
+    "static/js/main.43163c4e.js"
+  ]
+}
