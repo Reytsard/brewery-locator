@@ -13,6 +13,7 @@ const BrewerySlice = createSlice({
       lat: null,
       lng: null,
     },
+    wishlistCount: 0,
   },
   reducers: {
     setSearchInput: (state, action) => {
@@ -31,6 +32,7 @@ const BrewerySlice = createSlice({
       if (index !== -1) {
       } else {
         state.wishlist.push(action.payload);
+        state.wishlistCount++;
       }
     },
     removeFromWishList: (state, action) => {
@@ -38,6 +40,7 @@ const BrewerySlice = createSlice({
         (item) => item.id === action.payload.id
       );
       state.wishlist.splice(index, 1);
+      state.wishlistCount--;
     },
   },
   extraReducers: (builder) => {

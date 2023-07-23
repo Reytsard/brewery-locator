@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToWishList,
@@ -6,7 +6,6 @@ import {
   setLatitude,
   setLongitude,
 } from "../feature/BrewerySlice";
-import { NavLink } from "react-router-dom";
 import Map from "./Map";
 import "../styles/main.css";
 
@@ -21,7 +20,7 @@ function BreweryLocator() {
     dispatch(fetchBrewery(search));
   };
   const addSelectedItemHandler = (brewery) => {
-    setSelectedBrewery(Object.assign(brewery));
+    setSelectedBrewery(brewery);
   };
   const mapDetails = useMemo(() => {
     if (selectedBrewery.longitude === null) {
@@ -33,10 +32,7 @@ function BreweryLocator() {
     }
   }, [selectedBrewery, dispatch]);
   const toggleClass = useCallback(() => {
-    document
-      .querySelector(".wishlist")
-      .closest(".alert")
-      .classList.toggle("d-none");
+    document.querySelector(".alert").classList.toggle("d-none");
   }, []);
   const breweryDetails = useMemo(() => {
     if (Object.keys(selectedBrewery).length !== 0) {
@@ -52,7 +48,7 @@ function BreweryLocator() {
               <h5>Phone: {selectedBrewery.phone}</h5>
               <h5>Website: {selectedBrewery.website_url}</h5>
             </div>
-            <div className="container wishlist">
+            <div className="container wishlist ">
               <button
                 className="wishlist-btn btn btn-md btn-outline-secondary"
                 onClick={() => {
@@ -62,7 +58,7 @@ function BreweryLocator() {
               >
                 Add to Wishlist
               </button>
-              <div className="alert d-none">Added to Wishlist</div>
+              <div className="alert d-none d-inline">Added to Wishlist</div>
             </div>
           </div>
           <div className="row map-size">{mapDetails}</div>
@@ -77,28 +73,20 @@ function BreweryLocator() {
   const breweryLocation = useMemo(() => {
     if (breweryLocationData.length !== 0) {
       return breweryLocationData.map((item) => (
-        <NavLink
+        <button
           key={item.id}
           className="card text-decoration-none p-2"
           onClick={() => addSelectedItemHandler(item)}
         >
           {item.name}
-        </NavLink>
+        </button>
       ));
     } else {
       return <div className="container border">Input a location</div>;
     }
   }, [breweryLocationData]);
   return (
-    <div className="brewery-locator">
-      <div className="row w-100 d-flex flex-column py- g-0">
-        <h2 className="d-flex align-items-center justify-content-center">
-          Brewery Location
-        </h2>
-        <span className="d-flex align-items-center justify-content-center">
-          Locate a brewery right now
-        </span>
-      </div>
+    <div className="brewery-locator my-5">
       <div className="search-bar px-2 g-0 row d-flex justify-content-center align-items-center">
         <div className="col-4 border h-100 py-4 px-3 overflow-scroll ">
           <input
