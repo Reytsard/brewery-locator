@@ -56,8 +56,8 @@ function BreweryLocator() {
               <button
                 className="wishlist-btn btn btn-md btn-outline-secondary"
                 onClick={() => {
-                  // dispatch(addToWishList(selectedBrewery));
-                  // toggleClass();
+                  dispatch(addToWishList(selectedBrewery));
+                  toggleClass();
                 }}
               >
                 Add to Wishlist
