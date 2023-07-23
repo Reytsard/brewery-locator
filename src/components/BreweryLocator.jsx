@@ -1,6 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  addToWishList,
   fetchBrewery,
   setLatitude,
   setLongitude,
@@ -31,6 +32,12 @@ function BreweryLocator() {
       return <Map />;
     }
   }, [selectedBrewery, dispatch]);
+  const toggleClass = useCallback(() => {
+    document
+      .querySelector(".wishlist")
+      .closest(".alert")
+      .classList.toggle("d-none");
+  }, []);
   const breweryDetails = useMemo(() => {
     if (Object.keys(selectedBrewery).length !== 0) {
       return (
@@ -45,13 +52,25 @@ function BreweryLocator() {
               <h5>Phone: {selectedBrewery.phone}</h5>
               <h5>Website: {selectedBrewery.website_url}</h5>
             </div>
+            <div className="container wishlist">
+              <button
+                className="wishlist-btn btn btn-md btn-outline-secondary"
+                onClick={() => {
+                  // dispatch(addToWishList(selectedBrewery));
+                  // toggleClass();
+                }}
+              >
+                Add to Wishlist
+              </button>
+              <div className="alert d-none">Added to Wishlist</div>
+            </div>
           </div>
           <div className="row map-size">{mapDetails}</div>
         </div>
       );
     }
     return <div className="container h-100 text-center ">Select A Brewery</div>;
-  }, [selectedBrewery, mapDetails]);
+  }, [selectedBrewery, mapDetails, dispatch, toggleClass]);
   const breweryLocationData = useSelector(
     (state) => state.brewery.searchValues
   );
