@@ -2,6 +2,7 @@
   "name": "brewery",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://reytsard.github.io/brewery-locator",
   "dependencies": {
     "@react-google-maps/api": "^2.19.0",
     "@reduxjs/toolkit": "^1.9.5",
@@ -19,6 +20,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -40,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
